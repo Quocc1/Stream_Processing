@@ -1,0 +1,93 @@
+version: '3.8'
+services:
+  jobmanager:
+    container_name: jobmanager
+    build:
+      context: ./container/flink/
+    ports:
+      - '8081:8081'
+      - '9249:9249'
+    command: jobmanager
+    volumes:
+      - ./code:/opt/flink/code
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+
+  taskmanager:
+    container_name: taskmanager
+    build:
+      context: ./container/flink
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    ports:
+      - '9250:9249'
+    volumes:
+      - ./code:/opt/flink/code
+    scale: 1
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+
+  grafana:
+    image: grafana/grafana:10.3.1
+    container_name: grafana
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+
+  zookeeper:
+    image: bitnami/zookeeper:3.9.1
+    container_name: zookeeper
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+  kafka:
+    image: bitnami/kafka:3.5.2
+    container_name: kafka
+    ports:
+      - '9093:9093'
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=INSIDE://:9092,OUTSIDE://:9093
+      - KAFKA_CFG_LISTENERS=INSIDE://:9092,OUTSIDE://:9093
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INSIDE
+    restart: on-failure
+    depends_on:
+      - zookeeper
+
+  postgres:
+    image: postgres:16.1
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data:/postgres/data
+
+  generate_data:
+    build:
+      context: ./container/generate_data
+    container_name: generate_data
+    volumes:
+      - ./code/generate_data:/generate_data
+      - ./data:/generate_data/data
+    command: python /generate_data/gen_data.py
+    restart: on-failure
+    depends_on:
+      - postgres
+      - kafka
