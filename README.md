@@ -14,7 +14,7 @@ Stream Processor is a project aimed at providing real-time click attribution and
    - [Purpose](#purpose)
 5. [Data Flow](#data-flow)
 6. [Streaming Concept](#streaming-concept)
-   - [Time attributes & watermarking](#Time-attributes-&-watermarking)
+   - [Time attributes & watermarking](#time-attributes-&-watermarking)
    - [Stream joining](#stream-joining)
 7. [Project Overview](#project-overview)
 8. [Visualization](#visualization)
