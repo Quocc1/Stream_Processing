@@ -482,7 +482,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT payment_description, COUNT(payment_description) AS count\nFROM checkout_attribution\nWHERE checkout_timestamp >= now() -  INTERVAL '1 hour'\nGROUP BY payment_description\nORDER BY count DESC",
+          "rawSql": "SELECT payment_description, COUNT(payment_description) AS count\nFROM checkout_attribution\nWHERE checkout_timestamp >= now() -  INTERVAL '1 hour'\nAND payment_description != 'None'\nGROUP BY payment_description\nORDER BY count DESC",
           "refId": "A",
           "sql": {
             "columns": [
