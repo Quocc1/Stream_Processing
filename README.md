@@ -98,7 +98,7 @@ Understanding time attributes in stream processing is crucial, especially consid
 
 Event time: The time when the event occurred, typically provided by the system generating the data.
 Processing time: The time when the event is processed by the stream processing system.
-![time](/assets/event_processing_time.svg)
+![time](/assets/time.png)
 
 As events may arrive late, we need a mechanism to inform Apache Flink how long to wait for an event before considering it for processing. This is where watermarking comes into play.
 
