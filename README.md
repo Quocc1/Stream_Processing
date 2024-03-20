@@ -1,6 +1,6 @@
 # Real-Time Insights Engine: Click Attribution and E-commerce Analytics
 
-Stream Processor is a project aimed at providing real-time click attribution and dynamic e-commerce insights.
+This project aimed at providing real-time click attribution and dynamic e-commerce insights.
 
 ## Preview
 ![dashboard](/assets//dashboard.png)
