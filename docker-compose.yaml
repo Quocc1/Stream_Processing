@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 services:
   jobmanager:
     container_name: jobmanager
@@ -14,13 +14,20 @@ services:
       - |
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
+    healthcheck:
+      test: ['CMD', 'curl', '--fail', '-s', 'http://localhost:8081/']
+      interval: 10s
+      timeout: 30s
+      retries: 10
+      start_period: 30s
 
   taskmanager:
     container_name: taskmanager
     build:
       context: ./container/flink
     depends_on:
-      - jobmanager
+      jobmanager:
+        condition: service_healthy
     command: taskmanager
     ports:
       - '9250:9249'
@@ -48,6 +55,11 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    healthcheck:
+      test: ['CMD-SHELL', 'nc -zv localhost 2181 && exit 0 || exit 1']
+      interval: 10s
+      timeout: 30s
+      retries: 10
 
   kafka:
     image: bitnami/kafka:3.5.2
@@ -57,13 +69,19 @@ services:
     environment:
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-      - KAFKA_ADVERTISED_LISTENERS=INSIDE://:9092,OUTSIDE://:9093
+      - KAFKA_ADVERTISED_LISTENERS=INSIDE://:9093,OUTSIDE://:9093
       - KAFKA_CFG_LISTENERS=INSIDE://:9092,OUTSIDE://:9093
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=INSIDE
     restart: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "echo 'test-message' | kafka-console-producer.sh --broker-list localhost:9093 --topic health-check-topic && kafka-console-consumer.sh --bootstrap-server localhost:9093 --topic health-check-topic --from-beginning --max-messages 1 | grep 'test-message'"]
+      interval: 10s
+      timeout: 30s
+      retries: 10
     depends_on:
-      - zookeeper
+      zookeeper:
+        condition: service_healthy
 
   postgres:
     image: postgres:16.1
@@ -78,6 +96,12 @@ services:
     volumes:
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./data:/postgres/data
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+      interval: 10s
+      timeout: 30s
+      retries: 10
+      start_period: 30s
 
   generate_data:
     build:
@@ -89,5 +113,7 @@ services:
     command: python /generate_data/gen_data.py
     restart: on-failure
     depends_on:
-      - postgres
-      - kafka
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
