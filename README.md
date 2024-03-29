@@ -103,13 +103,15 @@ The diagram below illustrates the data flow in Flink.
 
 Understanding time attributes in stream processing is crucial, especially considering the possibility of out-of-order data arrival. There are two main types of [time](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/concepts/time_attributes/) in stream processing:
 
-Event time: The time when the event occurred, typically provided by the system generating the data.
-Processing time: The time when the event is processed by the stream processing system.
+**Event time**: The time when the event occurred, typically provided by the system generating the data.
+
+**Processing time**: The time when the event is processed by the stream processing system.
+
 ![time](/assets/time.png)
 
-As events may arrive late, we need a mechanism to inform Apache Flink how long to wait for an event before considering it for processing. This is where watermarking comes into play.
+As events may arrive late, we need a mechanism to inform Apache Flink how long to wait for an event before considering it for processing. This is where [watermarking](https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/event-time/generating_watermarks/#introduction-to-watermark-strategies) comes into play.
 
-Watermarking is a mechanism that instructs the stream processing system to wait for a specified duration before allowing late-arriving events to affect the output. For example, if the watermark is set to 5 minutes, Apache Flink will wait for 5 minutes after the event time before considering any late-arriving events for processing. Any events arriving after this watermark interval will be ignored.
+**Watermarking**: A mechanism that instructs the stream processing system to wait for a specified duration before allowing late-arriving events to affect the output. For example, if the watermark is set to 5 minutes, Apache Flink will wait for 5 minutes after the event time before considering any late-arriving events for processing. Any events arriving after this watermark interval will be ignored.
 
 ```sql
 checkout_timestamp TIMESTAMP(3),
@@ -121,7 +123,7 @@ In our project, we derive event time from the source data. We define a watermark
 
 ### Stream joining
 
-In this project, we utilize the interval join in Flink, which allows us to join data streams based on a specified time range condition. The interval join is particularly useful when we need to ensure that one stream's time falls within a certain range of time of another stream.
+In this project, we utilize the **interval join** in Flink, which allows us to join data streams based on a specified time range condition. The interval join is particularly useful when we need to ensure that one stream's time falls within a certain range of time of another stream.
 
 For more details on interval joins or other joins in Flink, refer to the [official documentation](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/datastream/operators/joining/#interval-join).
 
@@ -230,9 +232,10 @@ Stream_Processing
 
 ## Visualization
 
-For visualization using Grafana, access **localhost:3000** with both the username and password set to **"admin"**.
+For visualization using Grafana, access [localhost:3000](http://localhost:3000) (username `admin` and password `admin`).
 
 After accessing Grafana with the provided credentials, choose the **"Ecommerce Monitoring"** dashboard for viewing.
+
 ![grafana](/assets/grafana.png)
 
 ![dashboard](/assets/dashboard.png)
