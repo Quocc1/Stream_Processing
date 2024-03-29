@@ -61,7 +61,7 @@ cd Stream_Processing
 make run
 ```
 
-**Note**: Refer to the [Makefile](https://github.com/Quocc1/Stream_Processing/blob/main/Makefile) for details on commands and execution. Use `make down` to stop the containers.
+**Note**: Run `make help` or refer to the [Makefile](https://github.com/Quocc1/Stream_Processing/blob/main/Makefile) for details on commands and execution. Use `make down` to stop the containers.
 
 If you encounter issues running the Makefile on Windows, refer to [this Stack Overflow post](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows) for potential solutions.
 
