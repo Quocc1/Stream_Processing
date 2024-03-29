@@ -20,8 +20,17 @@ flink:
 
 run: down up flink
 
+####################################################################################################################
+# Monitoring
 grafana-ui:
 	explorer.exe http://localhost:3000
 
 flink-ui:
 	explorer.exe http://localhost:8081
+
+# If you are using Linux, you may use this command instead
+grafana-ui-linux:
+  open http://localhost:3000
+
+flink-ui-linux:
+  open http://localhost:8081
