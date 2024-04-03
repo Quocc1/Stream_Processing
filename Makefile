@@ -27,7 +27,7 @@ flink-ui:
 
 # If you are using Linux, you may use this command instead
 grafana-ui-linux:
-  open http://localhost:3000
+	open http://localhost:3000
 
 flink-ui-linux:
-  open http://localhost:8081
+	open http://localhost:8081
