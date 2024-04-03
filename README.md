@@ -34,12 +34,14 @@ We will implement **First Click Attribution**, considering the earliest click wi
 
 Below is a list of technologies used in this project:
 
-- [Flink](https://flink.apache.org/) for stream processing
-- [Kafka](https://kafka.apache.org/) for data streaming.
-- [Grafana](https://grafana.com/) for visualization.
-- [PostgreSQL](https://www.postgresql.org/) acting as the OLTP database.
-- [Docker](https://www.docker.com/) for containerizing the project.
-- [Python](https://www.python.org/) as the primary programming language.
+| Component | Description |  URL  |
+| --------- | ----------- | ----- |
+| [Flink](https://flink.apache.org/) | Stream processing | http://localhost:8081
+| [Kafka](https://kafka.apache.org/) | Data streaming. | 
+| [Grafana](https://grafana.com/) | Visualization. | http://localhost:3000
+| [PostgreSQL](https://www.postgresql.org/) | OLTP database | 
+| [Docker](https://www.docker.com/) | Containerizing the project |  
+| [Python](https://www.python.org/) | Programming language | 
 
 ## Prerequisites
 
@@ -54,10 +56,17 @@ git clone https://github.com/Quocc1/Stream_Processing
 ```
 
 2. Start the Docker engine.
-3. Run the following command from the project directory to execute the project:
+
+3. CD to the project directory then spin up the docker-compose:
 
 ```bash
 cd Stream_Processing
+make up
+```
+
+4. Wait for the docker-compose to finish, then run:
+
+```bash
 make run
 ```
 

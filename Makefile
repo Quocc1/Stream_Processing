@@ -10,7 +10,7 @@ help:
 	@echo "  flink-ui        Open Flink UI"
 
 up:
-	docker compose up --build -d
+	docker compose up -d
 
 down:
 	docker compose down
@@ -18,7 +18,7 @@ down:
 flink:
 	docker exec jobmanager ./bin/flink run --python ./code/main.py
 
-run: down up flink
+run: flink
 
 ####################################################################################################################
 # Monitoring
