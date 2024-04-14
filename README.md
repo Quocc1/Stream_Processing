@@ -37,8 +37,8 @@ Below is a list of technologies used in this project:
 | Component | Description |  URL  |
 | --------- | ----------- | ----- |
 | [Flink](https://flink.apache.org/) | Stream processing | http://localhost:8081
-| [Kafka](https://kafka.apache.org/) | Data streaming. | 
-| [Grafana](https://grafana.com/) | Visualization. | http://localhost:3000
+| [Kafka](https://kafka.apache.org/) | Data streaming | 
+| [Grafana](https://grafana.com/) | Visualization | http://localhost:3000
 | [PostgreSQL](https://www.postgresql.org/) | OLTP database | 
 | [Docker](https://www.docker.com/) | Containerizing the project |  
 | [Python](https://www.python.org/) | Programming language | 
