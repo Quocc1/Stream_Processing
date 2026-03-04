@@ -4,7 +4,7 @@ CREATE TEMPORARY TABLE products (
   category STRING,
   brand STRING,
   price DECIMAL(6, 2),
-  commission_rate DECIMAL(6, 2) ,
+  commission_rate DECIMAL(6, 2),
   PRIMARY KEY (product_id) NOT ENFORCED
 ) WITH (
   'connector' = '{{ connector }}',

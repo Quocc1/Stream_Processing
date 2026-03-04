@@ -10,13 +10,13 @@ datasources:
     url: postgres:5432
     user: grafana
     secureJsonData:
-      password: 'grafana'
+      password: "grafana"
     jsonData:
       database: postgres
-      sslmode: 'disable'
+      sslmode: "disable"
       maxOpenConns: 100 # Grafana v5.4+
       maxIdleConns: 100 # Grafana v5.4+
       maxIdleConnsAuto: true # Grafana v9.5.1+
       connMaxLifetime: 14400 # Grafana v5.4+
-      postgresVersion: '16.1'
+      postgresVersion: "16.1"
       timescaledb: false

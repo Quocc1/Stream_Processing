@@ -14,7 +14,7 @@ up:
 down:
 	docker compose down
 
-run: 
+run:
 	docker exec jobmanager ./bin/flink run --python ./code/main.py
 
 ####################################################################################################################

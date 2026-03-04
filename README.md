@@ -34,14 +34,14 @@ We will implement **First Click Attribution**, considering the earliest click wi
 
 Below is a list of technologies used in this project:
 
-| Component | Description |  URL  |
-| --------- | ----------- | ----- |
-| [Flink](https://flink.apache.org/) | Stream processing | http://localhost:8081
-| [Kafka](https://kafka.apache.org/) | Data streaming | 
-| [Grafana](https://grafana.com/) | Visualization | http://localhost:3000
-| [PostgreSQL](https://www.postgresql.org/) | OLTP database | 
-| [Docker](https://www.docker.com/) | Containerizing the project |  
-| [Python](https://www.python.org/) | Programming language | 
+| Component                                 | Description                | URL                     |
+| ----------------------------------------- | -------------------------- | ----------------------- |
+| [Flink](https://flink.apache.org/)        | Stream processing          | <http://localhost:8081> |
+| [Kafka](https://kafka.apache.org/)        | Data streaming             |
+| [Grafana](https://grafana.com/)           | Visualization              | <http://localhost:3000> |
+| [PostgreSQL](https://www.postgresql.org/) | OLTP database              |
+| [Docker](https://www.docker.com/)         | Containerizing the project |
+| [Python](https://www.python.org/)         | Programming language       |
 
 ## Prerequisites
 
@@ -55,16 +55,16 @@ Below is a list of technologies used in this project:
 git clone https://github.com/Quocc1/Stream_Processing
 ```
 
-2. Start the Docker engine.
+1. Start the Docker engine.
 
-3. CD to the project directory then spin up the docker-compose:
+2. CD to the project directory then spin up the docker-compose:
 
 ```bash
 cd Stream_Processing
 make up
 ```
 
-4. Wait for the docker-compose to finish, then run:
+1. Wait for the docker-compose to finish, then run:
 
 ```bash
 make run
@@ -80,12 +80,12 @@ If you encounter issues running the Makefile on Windows, refer to [this Stack Ov
 
 The diagram illustrates the conceptual view of the streaming pipeline (from left to right).
 
-1.  Data is generated and sent to Kafka topics.
-2.  Flink retrieves this data and performs operations such as enrichment, joining, filtering, recalculating, and aggregation.
-3.  Then forward it to the PostgreSQL sink.
-4.  Finally, Grafana pulls processed aggregate data for near real-time visualization.
+1. Data is generated and sent to Kafka topics.
+2. Flink retrieves this data and performs operations such as enrichment, joining, filtering, recalculating, and aggregation.
+3. Then forward it to the PostgreSQL sink.
+4. Finally, Grafana pulls processed aggregate data for near real-time visualization.
 
-### Purpose:
+### Purpose
 
 For each successful attribution, we aim to identify which source the user clicked on, such as TikTok Ads, Google Ads, Facebook posts, etc. This evaluation helps determine the most effective advertising platform in the last hour.
 
@@ -157,7 +157,7 @@ Stream_Processing
 │   └── pictures
 ├── code/
 │   ├── generate_data/
-│   │   └── gen_data.py
+│   │   └── main.py
 │   ├── process/
 │   │   └── insert_into_sink.sql
 │   ├── sink/
@@ -197,10 +197,10 @@ Stream_Processing
 
 ```
 ├── generate_data/
-│   └── gen_data.py
+│   └── main.py
 ```
 
-**gen_data.py**: Generates and populates data into Kafka topics "clicks" and "checkouts".
+**main.py**: Generates and populates data into Kafka topics "clicks" and "checkouts".
 
 ```
 ├── source/

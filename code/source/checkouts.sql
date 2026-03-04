@@ -14,7 +14,7 @@ CREATE TABLE checkouts (
   WATERMARK FOR checkout_timestamp AS checkout_timestamp - INTERVAL '15' SECOND
 ) WITH (
   'connector' = '{{ connector }}',
-  'topic' =  '{{ topic }}',
+  'topic' = '{{ topic }}',
   'properties.bootstrap.servers' = '{{ bootstrap_servers }}',
   'properties.group.id' = '{{ group_id }}',
   'format' = '{{ format }}',
