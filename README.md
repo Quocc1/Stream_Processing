@@ -16,7 +16,7 @@ This project aimed at providing real-time click attribution and dynamic e-commer
    - [Purpose](#purpose)
 5. [Data Flow](#data-flow)
 6. [Streaming Concept](#streaming-concept)
-   - [Time attributes & watermarking](#time-attributes-&-watermarking)
+   - [Time attributes & watermarking](#time-attributes--watermarking)
    - [Stream joining](#stream-joining)
 7. [Project Overview](#project-overview)
 8. [Visualization](#visualization)
@@ -28,20 +28,20 @@ An E-commerce website processes many requests daily, prompting the company to se
 
 We will implement **First Click Attribution**, considering the earliest click within the last 15 seconds.
 
-(For more on click attribution, see [here](https://agencyanalytics.com/blog/marketing-attribution-models#:~:text=What%20Are%20the%20Different%20Types%20of%20Attribution%20Models%3F))
+(For more on click attribution, see [this overview of marketing attribution models](https://agencyanalytics.com/blog/marketing-attribution-models#:~:text=What%20Are%20the%20Different%20Types%20of%20Attribution%20Models%3F))
 
 ### Technologies Used
 
 Below is a list of technologies used in this project:
 
-| Component                                 | Description                | URL                     |
-| ----------------------------------------- | -------------------------- | ----------------------- |
-| [Flink](https://flink.apache.org/)        | Stream processing          | <http://localhost:8081> |
-| [Kafka](https://kafka.apache.org/)        | Data streaming             |
-| [Grafana](https://grafana.com/)           | Visualization              | <http://localhost:3000> |
-| [PostgreSQL](https://www.postgresql.org/) | OLTP database              |
-| [Docker](https://www.docker.com/)         | Containerizing the project |
-| [Python](https://www.python.org/)         | Programming language       |
+|Component|Description|URL|
+|--------|-----------|---|
+|[Flink](https://flink.apache.org/)|Stream processing|<http://localhost:8081>|
+|[Kafka](https://kafka.apache.org/)|Data streaming|-|
+|[Grafana](https://grafana.com/)|Visualization|<http://localhost:3000>|
+|[PostgreSQL](https://www.postgresql.org/)|OLTP database|-|
+|[Docker](https://www.docker.com/)|Containerizing the project|-|
+|[Python](https://www.python.org/)|Programming language|-|
 
 ## Prerequisites
 
@@ -51,20 +51,19 @@ Below is a list of technologies used in this project:
 
 1. Pull the project from the repository.
 
-```bash
-git clone https://github.com/Quocc1/Stream_Processing
-```
+   ```bash
+   git clone https://github.com/Quocc1/Stream_Processing
+   ```
 
-1. Start the Docker engine.
+2. Start the Docker engine.
+3. CD to the project directory then spin up the docker-compose:
 
-2. CD to the project directory then spin up the docker-compose:
+   ```bash
+   cd Stream_Processing
+   make up
+   ```
 
-```bash
-cd Stream_Processing
-make up
-```
-
-1. Wait for the docker-compose to finish, then run:
+4. Wait for the docker-compose to finish, then run:
 
 ```bash
 make run
@@ -151,7 +150,7 @@ In this query, we match checkouts with clicks based on the condition that the ch
 
 ## Project Overview
 
-```
+```text
 Stream_Processing
 ├── assets/
 │   └── pictures
@@ -195,14 +194,14 @@ Stream_Processing
 
 ### Overview
 
-```
+```text
 ├── generate_data/
 │   └── main.py
 ```
 
 **main.py**: Generates and populates data into Kafka topics "clicks" and "checkouts".
 
-```
+```text
 ├── source/
 │   ├── checkouts.sql
 │   ├── clicks.sql
@@ -216,14 +215,14 @@ Stream_Processing
 
 **products.sql** and **users.sql**: Define [temporary tables](https://www.freecodecamp.org/news/sql-temp-table-how-to-create-a-temporary-sql-table/#:~:text=A%20temporary%20SQL%20table%2C%20also,require%20a%20permanent%20storage%20solution.) for streaming joins.
 
-```
+```text
 ├── sink/
 │   └── checkout_attribution.sql
 ```
 
 **checkout_attribution.sql**: Define a sink table that stores the final result from joining the stream
 
-```
+```text
 ├── process/
 │   └── insert_into_sink.sql
 ```
@@ -233,7 +232,7 @@ Stream_Processing
 - Defines SQL script for processing data by joining stream data from Kafka topics "clicks" and "checkouts" within the last 1 hour.
 - Finally, results are written into the PostgreSQL.
 
-```
+```text
 │   └── main.py
 ```
 
