@@ -65,9 +65,9 @@ Below is a list of technologies used in this project:
 
 4. Wait for the docker-compose to finish, then run:
 
-```bash
-make run
-```
+   ```bash
+   make run
+   ```
 
 **Note**: Run `make help` or refer to the [Makefile](https://github.com/Quocc1/Stream_Processing/blob/main/Makefile) for details on commands and execution. Use `make down` to stop the containers.
 
